@@ -7,10 +7,10 @@ var schema = new mongoose.Schema({
 		type: String,
 		required: true,
   },
-  deck: {
+  cards: [{
 		type: ObjectId,
 		ref: 'Card'
-  },
+  }],
 });
 
-mongoose.model('Game', schema);
+mongoose.model('Deck', schema);
