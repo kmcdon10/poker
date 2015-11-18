@@ -1,0 +1,17 @@
+<section id="home">
+    <!-- <poker-logo></poker-logo> -->
+    <div class="poker-logo"><img src="/images/poker-logo.png"></div>
+	  <h1 class="text-success"><strong>Poker Tutorial</strong><br>
+	    <small>Not a Hearthstone inspired trading card game</small>
+	  </h1>
+	  <br>
+	  <div ng-hide="user" class="text-center top">
+	    <button class="btn btn-success btn-lg" ui-sref="login">Login</button>
+	  </div>
+	  <div ng-show="user" class="text-center top">
+	    <span ng-repeat="option in options">
+	      <button class="btn btn-success" ui-sref="{{option.sref}}">{{option.name}}</button>
+	    </span>
+	  </div>
+
+</section>

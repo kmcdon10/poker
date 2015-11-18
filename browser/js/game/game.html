@@ -1,0 +1,58 @@
+<section>
+<style>
+  body {
+    background: url('./images/stardust.png')
+  }
+</style>
+<div class="opponent-name name">{{ opponent.name }}</div>
+<div id="gameboard">
+  <div id="opponent">
+    <div class="player-info">
+      <player player="opponent" ng-drop="player.selecting || opponent.attackable && player.turn" ng-drop-success="select({selector: $data, selectee: null}, $event)"></player>
+    </div>
+    <div class="hand">
+      <blank-card class="opponent-card hand-card small" ng-repeat="card in opponent.hand" card="card"></blank-card>
+    </div>
+    <div class="extra">
+      <div ng-show="enlarge" align="right" class="pull-right" style="position: absolute;">
+        <card card="enlarge"></card>
+        <p style="text-align: left; color: #fff; position: absolute;">{{enlargedDescription}}</p>
+      </div>
+    </div>
+  </div>
+  <div id="table" ng-drop="player.turn">
+    <div class="message" ng-class="{'fade-in': player.message}" ng-click="m()">{{ player.message }}
+    </div>
+    <div ng-if="hint.message" class="hint">{{ hint.message }}</div>
+    <selector ng-show="player.selecting" ng-drag="player.selecting" ng-drag-data=""></selector>
+    <div id="opponent-summoned">
+      <div ng-repeat="minion in opponent.summonedMinions" ng-mouseenter="enlargeCard(minion); describeAbilities(minion);" ng-mouseleave="enlargeCard(); describeAbilities();">
+        <minion minion="minion" ng-class="{'taunt': minion.logic.taunt}"
+        ng-drop="player.selecting || minion.attackable && player.turn" ng-drop-success="select({selector: $data, selectee: minion})"></minion>
+      </div>
+    </div>
+    <div id="summoned">
+      <div ng-repeat="minion in player.summonedMinions" ng-mouseenter="enlargeCard(minion); describeAbilities(minion)" ng-mouseleave="enlargeCard(); describeAbilities()">
+        <minion minion="minion" ng-class="{'taunt': minion.logic.taunt}" ng-drop="player.selecting" ng-drag-data="minion" ng-drag="minion.canAttack && player.turn" ng-drop-success="select({selector: $data, selectee: minion})"></minion>
+      </div>
+    </div>
+  </div>
+  <div id="player">
+    <div class="player-info">
+      <player player="player" ng-drop="player.selecting" ng-drop-success="select({selector: $data, selectee: 'self'})"></player>
+    </div>
+    <div class="hand">
+      <card ng-repeat="card in player.hand" class="hand-card small" card="card" ng-mouseenter="enlargeCard(card); describeAbilities(card);" ng-mouseleave="enlargeCard(); describeAbilities();" ng-drag-data="card" ng-drag="player.turn && card.cost <= player.mana" ng-drag-success="summon($data, $event)"></card>
+    </div>
+    <div class="extra">
+      <ul class="buttons">
+        <li><button class="btn-success" ng-click="toggleHint()">{{ hint.status }} Hint</button></li>
+        <li><button class="btn-success" ng-click="endTurn()" ng-show="player.turn">End Turn</button></li>
+        <li><button class="btn-success" ng-click='leave()'>Leave game</button></li>
+      </ul>
+    </div>
+  </div>
+  <div id="win" ng-show="win"></div>
+</div>
+<div class="player-name name">{{ player.name }}</div>
+</section>

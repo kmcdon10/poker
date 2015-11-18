@@ -1,0 +1,37 @@
+  <div class="absolute shadow cost-shadow" ng-class="{'minion': card.type === 'minion', spell: card.type === 'spell'}"></div>
+  <div class="absolute shadow ap-hp-shadow" ng-show="card.type === 'minion'"></div>
+  <div class="absolute shadow name-shadow"></div>
+  <div class="absolute background">
+    <img ng-src="./images/cards/{{card.portrait}}">
+  </div>
+  <div class="absolute cost-bg label">
+    <div class="absolute cost-box" ng-class="{'minion': card.type === 'minion', spell: card.type === 'spell'}">
+      <img src="./images/silvercoin.png">
+      <div class="text">{{ card.cost }}</div>
+    </div>
+    <div class="absolute cost-triangle" ng-class="{'minion': card.type === 'minion', spell: card.type === 'spell'}"></div>
+  </div>
+  <div class="absolute ap-hp-bg label" ng-show="card.type === 'minion'">
+    <div class="absolute ap-hp-box">
+      <img src="./images/sword.png" class="ap">
+      <div class="ap text">{{ card.ap }}</div>
+      <img src="./images/shield.png" class="hp">
+      <div class="hp text">{{ card.hp }}</div>
+    </div>
+    <div class="absolute ap-hp-triangle"></div>
+  </div>
+  <div class="description-box">
+    <div class="description-text">
+      <span ng-if="card.logic.taunt">Loyal.</span>
+      <span ng-if="card.logic.divineShield">Steadfast.</span>
+      <span ng-if="card.logic.charge">Initiative.</span>
+      <span ng-if="card.logic.windfury">Agile.</span>
+      {{ card.description }}
+    </div>
+  </div>
+  <div class="absolute name-bg label">
+    <div class="absolute name-box"></div>
+    <div class="absolute name-triangle"></div>
+    <div class="absolute name-text">{{ card.name }}</div>
+  </div>
+</span>
